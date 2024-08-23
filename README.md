@@ -1,6 +1,3 @@
-
-
-
 ## Prerequisite
 
 1. The API server depends on python Flask. Run `pip3 install flask` to install the dependency.
@@ -14,8 +11,9 @@
 flask --app backend run
 ```
 
-2. The server has two endpoints
+2. The server has two endpoints:
     1. GET / - This endpoint returns a simple webpage that allows you to call `/log` endpoint by passing 3 parameters - filename, entries and filter.
+       ![output](https://github.com/user-attachments/assets/2749f9ec-b088-4b98-b30b-f9494410067e)
     2. GET /log - This endpoint allows you to view the log file under `/var/log` folder on the machine where the server is deployed.
 
 
