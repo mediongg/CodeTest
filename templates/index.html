@@ -1,0 +1,62 @@
+
+<html>
+
+<title>Demo</title>
+<style>
+
+.ctl {
+  margin: 9px;
+}
+
+.text {
+  margin-left: 9px;
+}
+
+</style>
+<body>
+
+  <div class="ctl">
+    <div>Control</div>
+    <input id="filename" placeholder="filename"/>
+    <input id="entries" placeholder="entries"/>
+    <input id="filter" placeholder="filter"/>
+    <button id="btn" onclick="submit()">Submit</button>
+  </div>
+
+  <div class="text">
+    <div>Log View</div>
+    <textarea id="log_view" rows="30" cols="100" readonly></textarea>
+  </div>
+</body>
+
+<script>
+
+async function submit() {
+  const filename = document.querySelector('#filename').value;
+  const entries = document.querySelector('#entries').value;
+  const filter = document.querySelector('#filter').value;
+  const logView = document.querySelector("#log_view");
+
+  const url = window.location.origin + `/log?filename=${filename}&entries=${entries}&filter=${filter}`;
+
+
+
+  try {
+    const content = await fetch(url);
+    const apiResponse = await content.text()
+
+    if (content.status !== 200) {
+      alert("API return error: " + apiResponse)
+      return;
+    }
+
+    const log = JSON.parse(apiResponse).join("\n");
+
+    logView.value = log;
+  } catch (e) {
+    alert("API return error");
+  }
+}
+
+</script>
+</html>
