@@ -19,6 +19,11 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(resp.status, '400 BAD REQUEST')
         self.assertEqual(resp.text, 'Bad request. Query param entries cannot be converted to integer: aa')
 
+        resp = client.get('/log', query_string={'filename': '../navigate_to_upper_folder', 'entries': 3})
+        self.assertEqual(resp.status, '400 BAD REQUEST')
+        self.assertEqual(resp.text, 'Bad request. Query param filename: ../navigate_to_upper_folder, entries: 3')
+
         resp = client.get('/log', query_string={'filename': 'NON_EXISTS', 'entries': 3})
         self.assertEqual(resp.status, '400 BAD REQUEST')
         self.assertEqual(resp.text, 'read file failed')
+

@@ -18,7 +18,7 @@ def get_log():
     try:
         entries = int(entries)
 
-        if fname == '' or entries <= 0:
+        if entries <= 0 or fname == '' or fname.find('..') >= 0:
             return 'Bad request. Query param filename: {}, entries: {}'.format(fname, entries), 400
     except ValueError:
         return 'Bad request. Query param entries cannot be converted to integer: {}'.format(entries), 400
